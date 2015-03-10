@@ -1,10 +1,44 @@
 <h1>Search</h1>
-<%= form_tag("/search", method: "get") do %>
+<%= form_tag(search_items_path, method: "get") do %>
+  <%= label_tag(:q, "Search for:") %>
+  <%= select_tag(:relation, options_for_select([['Any of these conditions (OR)','OR'], ['All of these conditions (AND)', 'AND']])) %></br>
+
   <%= label_tag(:q, "Title:") %>
-  <%= text_field_tag(:q) %></br>
+  <%= text_field_tag(:title) %></br>
+
   <%= label_tag(:q, "Description:") %>
-  <%= text_field_tag(:q) %></br>
+  <%= text_field_tag(:description) %></br>
+
+  <%= label_tag(:q, "Owner:") %>
+  <%= text_field_tag(:owner) %></br>
+
   <%= label_tag(:q, "Type:") %>
-  <%= text_field_tag(:q) %></br>
+  <%= collection_select(:item, :type_id, Type.all, :id, :title) %></br>
+
   <%= submit_tag("Search") %>
+<% end %>
+
+<% if @results %>
+  <h3><%= pluralize(@results.size, 'result') %></h3>
+  <table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Owner</th>
+      <th>Type</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @results.each do |item| %>
+      <tr>
+        <td><%= item.title %></td>
+        <td><%= item.description %></td>
+        <td><%= item.owner %></td>
+        <td><%= item.type.title %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 <% end %>

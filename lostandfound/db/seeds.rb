@@ -27,29 +27,37 @@ Item.create!(
     },
     { title: 'Lonely Planet',
       description: 'Japan',
+      owner: '',
       type_id: book.id
     },
     { title: 'Core Java',
       description: 'V1',
+      owner: '',
       type_id: book.id
     },
     { title: 'Data Structure',
+      description: '',
       owner: 'CC',
       type_id: book.id
     },
     { title: 'T-shirt',
       description: 'black',
+      owner: '',
       type_id: clothing.id
     },
     { title: 'Swim suit',
       description: 'speedo',
+      owner: '',
       type_id: clothing.id
     },
     { title: 'T-shirt',
       description: 'white',
+      owner: '',
       type_id: clothing.id
     },
     { title: 'Sneakers',
+      description: '',
+      owner: '',
       type_id: clothing.id
     },
     { title: 'iPhone 6',
@@ -58,20 +66,28 @@ Item.create!(
       type_id: cellphone.id
     },
     { title: 'Nexus 4',
+      description: '',
+      owner: '',
       type_id: cellphone.id
     },
     { title: 'Lumia 625',
+      description: '',
+      owner: '',
       type_id: cellphone.id
     },
     { title: 'Macbook Air',
+      description: '',
       owner: 'Alice',
       type_id: computer.id
     },
     { title: 'Macbook Air',
+      description: '',
       owner: 'Bob',
       type_id: computer.id
     },
     { title: 'Keyboard',
+      description: '',
+      owner: '',
       type_id: other.id
     }
   ] )

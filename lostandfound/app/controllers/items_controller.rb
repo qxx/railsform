@@ -3,6 +3,9 @@ class ItemsController < ApplicationController
 
   # GET /items/search
   def search
+    if params[:item]
+      @results = search_result
+    end
   end
 
   # GET /items
@@ -75,4 +78,17 @@ class ItemsController < ApplicationController
     def item_params
       params.require(:item).permit(:title, :description, :type)
     end
+
+    def search_result
+      title = "%#{params[:title]}%"
+      description = "%#{params[:description]}%"
+      owner = "%#{params[:owner]}%"
+      type_id = params[:item][:type_id]
+      if params[:relation] == 'OR'
+        Item.where("title LIKE ? OR description LIKE ? OR owner LIKE ? OR type_id = #{type_id}", title, description, owner)
+      elsif params[:relation] == 'AND'
+        Item.where("title LIKE ? AND description LIKE ? AND owner LIKE ? AND type_id = #{type_id}", title, description, owner)
+      end
+    end
+
 end
