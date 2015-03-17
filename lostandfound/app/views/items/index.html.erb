@@ -7,6 +7,7 @@
     <tr>
       <th>Title</th>
       <th>Description</th>
+      <th>Owner</th>
       <th>Type</th>
       <th colspan="3"></th>
     </tr>
@@ -17,7 +18,8 @@
       <tr>
         <td><%= item.title %></td>
         <td><%= item.description %></td>
-        <td><%= item.type %></td>
+        <td><%= item.owner %></td>
+        <td><%= item.type.title %></td>
         <td><%= link_to 'Show', item %></td>
         <td><%= link_to 'Edit', edit_item_path(item) %></td>
         <td><%= link_to 'Destroy', item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
