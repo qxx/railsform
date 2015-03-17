@@ -35,7 +35,7 @@ class ItemsController < ApplicationController
     @item = Item.new(
       title:item_params["title"].presence || "", 
       description:item_params["description"].presence || "", 
-      owner:params["item"]["owner"].presence || "", 
+      owner:item_params["owner"].presence || "", 
       type_id:item_params["type"].to_i
     )
     respond_to do |format|
@@ -56,7 +56,7 @@ class ItemsController < ApplicationController
       if @item.update(
         title:item_params["title"].presence || "", 
         description:item_params["description"].presence || "", 
-        owner:params["item"]["owner"].presence || "", 
+        owner:item_params["owner"].presence || "", 
         type_id:item_params["type"].to_i
       )
         format.html { redirect_to @item, notice: 'Item was successfully updated.' }
@@ -86,7 +86,7 @@ class ItemsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def item_params
-      params.require(:item).permit(:title, :description, :type)
+      params.require(:item).permit(:title, :description, :owner, :type)
     end
 
     def search_result
