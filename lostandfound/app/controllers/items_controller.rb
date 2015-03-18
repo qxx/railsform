@@ -31,13 +31,7 @@ class ItemsController < ApplicationController
   # POST /items
   # POST /items.json
   def create
-
-    @item = Item.new(
-      title:item_params["title"].presence || "", 
-      description:item_params["description"].presence || "", 
-      owner:item_params["owner"].presence || "", 
-      type_id:item_params["type"].to_i
-    )
+    @item = Item.new(item_params)
     respond_to do |format|
       if @item.save
         format.html { redirect_to @item, notice: 'Item was successfully created.' }
@@ -53,12 +47,7 @@ class ItemsController < ApplicationController
   # PATCH/PUT /items/1.json
   def update
     respond_to do |format|
-      if @item.update(
-        title:item_params["title"].presence || "", 
-        description:item_params["description"].presence || "", 
-        owner:item_params["owner"].presence || "", 
-        type_id:item_params["type"].to_i
-      )
+      if @item.update(item_params)
         format.html { redirect_to @item, notice: 'Item was successfully updated.' }
         format.json { render :show, status: :ok, location: @item }
       else
@@ -86,7 +75,13 @@ class ItemsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def item_params
-      params.require(:item).permit(:title, :description, :owner, :type)
+      p = params.require(:item).permit(:title, :description, :owner, :type)
+      return {
+        title:p["title"].presence || "", 
+        description:p["description"].presence || "", 
+        owner:p["owner"].presence || "", 
+        type_id:p["type"].to_i
+      }
     end
 
     def search_result
